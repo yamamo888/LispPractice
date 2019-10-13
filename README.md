@@ -1,19 +1,4 @@
 # Lispの基礎
-
-参考URL：
-[Lispまとめ1](https://qiita.com/HaruoWakakusa/items/64f1b9a3f15ce85f0d0c)
-[Lispまとめ2](https://qiita.com/minekai374/items/f146009b403ed9395fe0)
-[Lispまとめ3](https://blog.codecamp.jp/lisp)
-[Lispまとめ4](http://bach.istc.kobe-u.ac.jp/lect/ProLang/org/lisp.html)
-
-
-## 項目 [Contents]
-
-1. 理論 (#ID_1)
-
-2. [install] (#ID_2)
-
-
 Lispとは List Processorの略であり、リストとよばれる可変長のデータ列を用いてデータを処理する動的言語となっている。<br>
 Lispの集合には、Common Lisp、 Scheme、 Clojure、 Racket等があるが、一般的にLispと呼ぶ場合はCommon Lispのことを指す。<br>
 開発者のJohn McCarthyは「人工知能：Artificial Intelligence」という言葉の提唱者であり、人工知能プログラムに多く使われる。<br>
@@ -26,11 +11,25 @@ Lispの集合には、Common Lisp、 Scheme、 Clojure、 Racket等があるが�
 |2007|関数型プログラミング言語Clojureが登場|
 
 
-以下、具体的に実際のプログラムとともにLispの特徴をまとめる。
+参考URL：
+[Lispまとめ1](https://qiita.com/HaruoWakakusa/items/64f1b9a3f15ce85f0d0c) <br>
+[Lispまとめ2](https://qiita.com/minekai374/items/f146009b403ed9395fe0) <br>
+[Lispまとめ3](https://blog.codecamp.jp/lisp) <br>
+[Lispまとめ4](http://bach.istc.kobe-u.ac.jp/lect/ProLang/org/lisp.html) <br>
+[Lispまとめ5](http://www.shido.info/misc/index.php) <br>
 
+
+## 項目 [Contents]
+
+1. 理論 (#ID_1)
+
+2. [install] (#ID_2)
+
+
+<a id="ID_1"></a>
 ***
 
-1. アトム
+## 1. アトム
 リストではないデータのことを指し、文字列や数値、シンボルのことである。ここで、シンボルとは「変数を格納する場所の名前」である。プログラム上では```'```を付ける必要がある。
 
 
@@ -50,7 +49,7 @@ Lispの集合には、Common Lisp、 Scheme、 Clojure、 Racket等があるが�
 
 ```lisp
 
-;パッケージ名や関数のキーワード引数を表現するのに使われる
+; パッケージ名や関数のキーワード引数を表現するのに使われる
 * :keyword
 
 ; 空リスト or 偽値
@@ -62,13 +61,13 @@ Lispの集合には、Common Lisp、 Scheme、 Clojure、 Racket等があるが�
 
 ***
 
-2. リスト
+## 2. リスト
 リストとは、括弧```()```で囲まれた要素を連ねた形式で表される。<br>
 関数呼び出しと差別するために```'```をつける。<br>
 必ず1つ以上の空白文字で区切る。<br>
 
 ```lisp
-;数値のリスト
+; 数値のリスト
 * '(1 2 3)
 
 ; シンボルのリスト
@@ -82,13 +81,44 @@ Lispの集合には、Common Lisp、 Scheme、 Clojure、 Racket等があるが�
 
 ```
 
+### リストの連結
+
+``` lisp
+* (append '(a b) '(c d))
+```
+
+### リストを使ったwhileループ
+
+``` lisp
+* (while listが空かどうかのテスト
+     処理....
+     listに自分自身のcdrをセット)
+```
+
+増加カウンタの例
+
+``` lisp
+(while (<= row-number number-of-rows)
+  (setq total (+ total row-number))
+  ; インクリメント
+  (setq row-number (1+ row-number)))
+```
+
+
 ***
 
 
-3. 関数定義
+## 3. 関数定義
 
-関数定義は```defun```を使う。
+関数定義は```defun```を使い、引数をとる関数を定義するときは```lambda```の後に引数リストを置く。
 
+``` lisp
+* (defun hello (lambda (name)
+    (format t "hello, ~a!~%" name)))
+
+```
+
+また、以下のように```lambda```を省略可能である。
 
 ```lisp
 
@@ -102,13 +132,17 @@ hello, yamamoto!
 ***
 
 
-4. 数式
+## 4. 数式
 演算子を前に記述する前置記法である。
 
 ```lisp
+; 足し算
 * (+ 1 2)
+; 引き算
 * (- 1 2)
+; 掛け算
 * (* 1 2)
+; 割算
 * (/ 1 2)
 ```
 
